@@ -43,10 +43,9 @@ def tratando_csv_aluno():
 
 
 def main():
-    download_dados()
-    print('Persistindo dados.')
-    engine = create_engine('postgresql+psycopg2://postgres:postgres@db_postgres:5432/tratador_db')
-    tratando_csv_aluno().to_sql(name='alunos', con=engine, if_exists='replace', index=True, index_label='id')
-    print('Persistência concluida.')
-
-main()
+    print("main data_processor")
+    # download_dados()
+    # print('Persistindo dados.')
+    # engine = create_engine('postgresql+psycopg2://postgres:postgres@db_postgres:5432/tratador_db')
+    # tratando_csv_aluno().to_sql(name='alunos', con=engine, if_exists='replace', index=True, index_label='id')
+    # print('Persistência concluida.')
