@@ -1,0 +1,13 @@
+version: '3'
+services:
+  db_postgres:
+    build: ./DB/
+    ports:
+      - "5433:5432"
+  python:
+    build: .
+    links: 
+      - db_postgres
+    volumes:
+      - .:/app/
+      - ./DB/dados:/app/DB/dados
