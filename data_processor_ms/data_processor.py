@@ -68,4 +68,3 @@ def run():
 	agendador()
 	thread = Thread(target=agendador)
 	thread.start()
-
