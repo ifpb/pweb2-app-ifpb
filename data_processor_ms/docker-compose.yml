@@ -11,3 +11,4 @@ services:
     volumes:
       - .:/app/
       - ./DB/dados:/app/DB/dados
+      - /etc/localtime:/etc/localtime:ro
