@@ -14,5 +14,10 @@ public class Aluno implements Serializable {
     public String id;
     public String nome;
 
+    public Projeto projeto;
+
+    public Bolsa bolsa;
+
+    public Matricula matricula;
 }
 
