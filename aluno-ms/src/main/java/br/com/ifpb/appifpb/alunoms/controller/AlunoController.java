@@ -1,6 +1,6 @@
 package br.com.ifpb.appifpb.alunoms.controller;
 
-import br.com.ifpb.appifpb.alunoms.domain.aluno.Aluno;
+import br.com.ifpb.appifpb.alunoms.domain.aluno.*;
 import br.com.ifpb.appifpb.alunoms.repository.AlunoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

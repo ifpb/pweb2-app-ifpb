@@ -5,6 +5,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Data
 @Document
@@ -14,10 +15,10 @@ public class Aluno implements Serializable {
     public String id;
     public String nome;
 
-    public Projeto projeto;
+    public List<Projeto> projetos;
 
-    public Bolsa bolsa;
+    public List<Bolsa> bolsas;
 
-    public Matricula matricula;
+    public List<Matricula> matriculas;
 }
 
