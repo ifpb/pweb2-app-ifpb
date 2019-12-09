@@ -1,8 +1,6 @@
-import data_processor as dp
-import kafka_comunication as kc
+import data_processor as DataProcessor
+import kafka_comunication as KafkaComunication
 
-def main():
-    dp.main()
-    kc.main()
-
-main()
+if __name__ == "__main__":
+    DataProcessor.run()
+    # KafkaComunication.main()

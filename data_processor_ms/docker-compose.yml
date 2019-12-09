@@ -3,7 +3,7 @@ services:
   db_postgres:
     build: ./DB/
     ports:
-      - "5433:5432"
+      - 5433:5432
   python:
     build: .
     links:
@@ -11,6 +11,7 @@ services:
     volumes:
       - .:/app/
       - ./DB/dados:/app/DB/dados
+      - /etc/localtime:/etc/localtime:ro
   zookeeper:
     image: confluentinc/cp-zookeeper:5.3.0
     environment:
@@ -29,4 +30,3 @@ services:
       KAFKA_CREATE_TOPICS: "meu-topico-legal:1:1"
       KAFKA_BROKER_ID: 2
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
-

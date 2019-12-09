@@ -2,6 +2,11 @@ import pandas
 import re
 from sqlalchemy import create_engine
 import requests
+from threading import Thread
+import schedule
+from time import sleep
+
+
 
 def download_dados():
     print('Iniciando download dos dados.\n...')
@@ -42,10 +47,24 @@ def tratando_csv_aluno():
     return alunos
 
 
-def main():
-    print("main data_processor")
-    # download_dados()
-    # print('Persistindo dados.')
-    # engine = create_engine('postgresql+psycopg2://postgres:postgres@db_postgres:5432/tratador_db')
-    # tratando_csv_aluno().to_sql(name='alunos', con=engine, if_exists='replace', index=True, index_label='id')
-    # print('Persistência concluida.')
+def persistir():
+    download_dados()
+    print('Persistindo dados.')
+    engine = create_engine('postgresql+psycopg2://postgres:postgres@db_postgres:5432/tratador_db')
+    tratando_csv_aluno().to_sql(name='alunos', con=engine, if_exists='replace', index=True, index_label='id')
+    print('Persistência concluida.')
+
+
+def agendador():
+    schedule.every().day.at("00:00").do(persistir)
+    schedule.every().minute.do(persistir)
+    while True:
+        schedule.run_pending()
+        sleep(1)
+
+
+def run():
+	persistir()
+	agendador()
+	thread = Thread(target=agendador)
+	thread.start()
