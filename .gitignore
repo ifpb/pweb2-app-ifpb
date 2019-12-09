@@ -12,7 +12,8 @@ local.properties
 .settings/
 .loadpath
 .recommenders
-
+# venv
+**/data_processor_ms/venv/**
 # External tool builders
 .externalToolBuilders/
 
@@ -56,6 +57,8 @@ local.properties
 .cache-main
 .scala_dependencies
 .worksheet
+# vscode
+**/data_processor_ms/.vscode/**
 
 ### Eclipse Patch ###
 # Eclipse Core
