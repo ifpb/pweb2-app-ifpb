@@ -8,4 +8,4 @@ COPY requirements.txt /app/requirements.txt
 #COPY ./DB/dados/alunos.csv /app/DB/dados/alunos.csv
 #COPY ./DB/dados/campi.csv /app/DB/dados/campi.csv
 RUN PYTHONPATH=/usr/bin/python pip3 install -r /app/requirements.txt
-CMD python3 /app/main_module.py
+CMD python3 -v /app/main_module.py

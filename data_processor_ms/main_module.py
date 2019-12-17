@@ -1,6 +1,6 @@
-import data_processor as DataProcessor
-import kafka_comunication as KafkaComunication
+import data_processor
+import kafka_manager
 
 if __name__ == "__main__":
-    DataProcessor.run()
-    # KafkaComunication.main()
+    # data_processor.run()
+    kafka_manager.run()

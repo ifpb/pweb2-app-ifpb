@@ -86,7 +86,7 @@ def agendador():
 
 
 def run():
-	print("run...")
+	print("run...1")
 	persistir()
 	agendador()
 	thread = Thread(target=agendador)
