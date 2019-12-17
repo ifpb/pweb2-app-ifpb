@@ -1,6 +1,6 @@
 package br.com.ifpb.appifpb.alunoms.config.security.jwt;
 
-import br.com.ifpb.pweb2.securitydemo.config.SecurityConfig;
+import br.com.ifpb.appifpb.alunoms.config.security.SecurityConfig;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
