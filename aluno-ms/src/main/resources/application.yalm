@@ -1,0 +1,24 @@
+server:
+  port: 8080
+
+spring:
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: aluno-ms
+      repositories:
+        enabled: true
+
+app:
+  autenticacaoPadrao:
+    login: diego
+    senha: 123
+    papel: ADMIN
+
+security:
+  tokenType: JWT
+  issuer: ifpb
+  audience: pweb2
+  expiration: 3600000
+  secret: n2r5u8x/A%D*G-KaPdSgVkYp3s6v9y$B&E(H+MbQeThWmZq4t7w!z%C*F-J@NcRf

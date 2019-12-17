@@ -1,4 +1,4 @@
-package br.com.ifpb.appifpb.alunoms.config;
+package br.com.ifpb.appifpb.alunoms.config.database;
 
 import br.com.ifpb.appifpb.alunoms.repository.AlunoRepository;
 import com.mongodb.client.MongoClients;
