@@ -5,10 +5,12 @@ from Domain import Aluno, Matricula, Bolsa, Projeto
 # 201422010139
 
 def dadosDaMatricula(engine, matricula):
-    query = engine.execute(f"SELECT matricula, nome, \"curso.nome\",situacao,cota,campus FROM alunos WHERE matricula='{matricula}'").fetchall()[0]
-    if(query):
-        aluno = Aluno(query[0], query[1])
-        aluno.matriculas = [Matricula(aluno.id, query[3], query[4], query[5], query[2])]
+    query = engine.execute(f"SELECT matricula, nome, \"curso.nome\",situacao,cota,campus FROM alunos WHERE matricula='{matricula}'")
+    if(query.rowcount > 0):
+        # primeira tupla
+        first = list(query)[0]
+        aluno = Aluno(first[0], first[1])
+        aluno.matriculas = [Matricula(aluno.id, first[3], first[4], first[5], first[2])]
         return aluno
     else:
         None
