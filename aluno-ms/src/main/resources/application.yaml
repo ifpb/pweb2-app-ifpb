@@ -4,7 +4,8 @@ server:
 spring:
   data:
     mongodb:
-      host: localhost
+#      uri: mongodb://localhost:27017/aluno-ms
+      host: mongo
       port: 27017
       database: aluno-ms
       repositories:

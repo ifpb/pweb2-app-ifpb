@@ -1,5 +1,6 @@
 package br.com.ifpb.appifpb.alunoms.service;
 
+import br.com.ifpb.appifpb.alunoms.controller.dto.UserDTO;
 import br.com.ifpb.appifpb.alunoms.domain.auth.User;
 import br.com.ifpb.appifpb.alunoms.repository.UserRepository;
 import br.com.ifpb.appifpb.alunoms.service.exception.UserException;
@@ -19,7 +20,8 @@ public class UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public void register(User user) throws UserException {
+    public void register(UserDTO userDTO) throws UserException {
+        User user = new User(userDTO.getMatricula(), userDTO.getSenha());
         try{
             user.setSenha(passwordEncoder.encode(user.getSenha()));
             this.userRepository.save(user);

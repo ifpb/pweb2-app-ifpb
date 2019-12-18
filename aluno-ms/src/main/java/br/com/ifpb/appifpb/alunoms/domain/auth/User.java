@@ -1,5 +1,6 @@
 package br.com.ifpb.appifpb.alunoms.domain.auth;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -10,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.Collections;
 
+@AllArgsConstructor
 @Data
 @Document
 public class User implements UserDetails {
