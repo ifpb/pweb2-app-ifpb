@@ -4,6 +4,8 @@ import br.com.ifpb.appifpb.alunoms.config.security.jwt.JwtUtil;
 import br.com.ifpb.appifpb.alunoms.controller.dto.AuthDTO;
 import br.com.ifpb.appifpb.alunoms.controller.dto.TokenDTO;
 import br.com.ifpb.appifpb.alunoms.controller.dto.UserDTO;
+import br.com.ifpb.appifpb.alunoms.domain.auth.User;
+import br.com.ifpb.appifpb.alunoms.repository.UserRepository;
 import br.com.ifpb.appifpb.alunoms.service.UserService;
 import br.com.ifpb.appifpb.alunoms.service.exception.UserException;
 import lombok.extern.slf4j.Slf4j;
@@ -11,10 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @Slf4j
@@ -28,11 +27,14 @@ public class AuthController {
 
     private final UserService userService;
 
-    public AuthController(AuthenticationManager authenticationManager, JwtUtil jwtUtil, PasswordEncoder passwordEncoder, UserService userService) {
+    private final UserRepository userRepository;
+
+    public AuthController(AuthenticationManager authenticationManager, JwtUtil jwtUtil, PasswordEncoder passwordEncoder, UserService userService, UserRepository userRepository) {
         this.jwtUtil = jwtUtil;
         this.authenticationManager = authenticationManager;
         this.passwordEncoder = passwordEncoder;
         this.userService = userService;
+        this.userRepository = userRepository;
     }
 
     @PostMapping("auth")
@@ -59,9 +61,9 @@ public class AuthController {
         }
     }
 
-    @GetMapping("teste")
-    public String teste() {
-        return "foi";
+    @GetMapping("teste/{matricula}")
+    public User teste(@PathVariable("matricula") String matricula) {
+        return this.userRepository.findById(matricula).get();
     }
 
 }

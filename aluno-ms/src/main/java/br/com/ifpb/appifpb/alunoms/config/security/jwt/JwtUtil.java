@@ -25,7 +25,6 @@ public class JwtUtil {
     }
 
     public String generateToken(Authentication authentication) {
-        System.out.println("=>>>>>>>>>>>>>>>>>>>> "+ securityConfig);
         UserDetails user = ((UserDetails) authentication.getPrincipal());
 
         List<String> roles = user.getAuthorities()

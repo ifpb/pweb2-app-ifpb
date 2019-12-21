@@ -5,11 +5,35 @@ spring:
   data:
     mongodb:
 #      uri: mongodb://localhost:27017/aluno-ms
-      host: mongo
+      host: localhost
       port: 27017
       database: aluno-ms
       repositories:
         enabled: true
+
+  cloud:
+    stream:
+      bindings:
+        userChannelReply:
+          contentType: application/json
+          group: pweb-receptor-matricula
+          destination: receptor-aluno
+        userChannel:
+          group: pweb-receptor-matricula
+          destination: receptor-matricula
+      kafka:
+        binder:
+          brokers: localhost:9092
+
+
+  kafka:
+    consumer:
+      bootstrap-servers: localhost:9092
+      group-id: pweb-receptor-matricula
+      auto-offset-reset: earliest
+    producer:
+      bootstrap-servers: localhost:9092
+
 
 app:
   autenticacaoPadrao:
