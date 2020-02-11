@@ -1,3 +1,7 @@
+data_processor_ms/.idea/
+data_processor_ms/.vscode/
+data_processor_ms/venv/
+
 *.csv
 
 .idea/

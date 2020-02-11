@@ -1,0 +1,49 @@
+server:
+  port: 8080
+
+spring:
+  data:
+    mongodb:
+#      uri: mongodb://localhost:27017/aluno-ms
+      host: localhost
+      port: 27017
+      database: aluno-ms
+      repositories:
+        enabled: true
+
+  cloud:
+    stream:
+      bindings:
+        userChannelReply:
+          contentType: application/json
+          group: pweb-receptor-matricula
+          destination: receptor-aluno
+        userChannel:
+          group: pweb-receptor-matricula
+          destination: receptor-matricula
+      kafka:
+        binder:
+          brokers: localhost:9092
+
+
+  kafka:
+    consumer:
+      bootstrap-servers: localhost:9092
+      group-id: pweb-receptor-matricula
+      auto-offset-reset: earliest
+    producer:
+      bootstrap-servers: localhost:9092
+
+
+app:
+  autenticacaoPadrao:
+    login: diego
+    senha: 123
+    papel: ADMIN
+
+security:
+  tokenType: JWT
+  issuer: ifpb
+  audience: pweb2
+  expiration: 3600000
+  secret: n2r5u8x/A%D*G-KaPdSgVkYp3s6v9y$B&E(H+MbQeThWmZq4t7w!z%C*F-J@NcRf
