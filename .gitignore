@@ -1,5 +1,9 @@
 *.csv
 
+.idea/
+.vscode/
+venv/
+
 ### Eclipse ###
 .metadata
 bin/
