@@ -29,18 +29,18 @@ public class UserService {
 
     public void register(UserDTO userDTO) throws UserException {
         System.out.println(userDTO);
-        User user = new User(userDTO.getMatricula(), userDTO.getSenha(), false);
+        User user = new User(userDTO.getMatricula(), userDTO.getSenha(), true);
         try{
             user.setSenha(passwordEncoder.encode(user.getSenha()));
             this.userRepository.save(user);
-            this.applicationEventPublisher.publishEvent(
-                    new UserRegisted(
-                            userDTO.getMatricula(),
-                            userDTO.getNomeCompleto(),
-                            userDTO.getCurso(),
-                            LocalDateTime.now()
-                    )
-            );
+//            this.applicationEventPublisher.publishEvent(
+//                    new UserRegisted(
+//                            userDTO.getMatricula(),
+//                            userDTO.getNomeCompleto(),
+//                            userDTO.getCurso(),
+//                            LocalDateTime.now()
+//                    )
+//            );
         } catch (DataIntegrityViolationException e) {
             throw new UserException("Login já cadastrado");
         }
