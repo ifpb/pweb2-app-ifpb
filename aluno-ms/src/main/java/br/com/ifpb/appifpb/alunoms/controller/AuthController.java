@@ -38,7 +38,7 @@ public class AuthController {
     }
 
     @PostMapping("auth")
-    public ResponseEntity login(@RequestBody AuthDTO authDTO) {
+    public String login(@RequestBody AuthDTO authDTO) {
 
         System.out.println(passwordEncoder.encode(authDTO.getSenha()));
 
@@ -47,7 +47,7 @@ public class AuthController {
 
         String token = this.jwtUtil.generateToken(authenticationManager.authenticate(authenticationToken));
 
-        return ResponseEntity.ok(new TokenDTO(token));
+        return token;
     }
 
     @PostMapping("register")
