@@ -5,6 +5,13 @@ import { environment } from '../../environments/environment';
 import { Token } from '@angular/compiler/src/ml_parser/lexer';
 import { Login } from '../models/Login';
 
+const httpOptions = new HttpHeaders(
+  {
+    'Content-Type': 'application/json',
+    'Authorization': sessionStorage.getItem('token')
+  }
+);
+
 @Injectable({
   providedIn: 'root'
 })
