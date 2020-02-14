@@ -3,15 +3,22 @@ from kafka import KafkaProducer
 import aluno_handler
 from Domain import Aluno
 import json
+from time import sleep
 
 TOPICO_RECEPTOR_MATRICULA = "receptor-matricula"
 TOPICO_RECEPTOR_ALUNO = "receptor-aluno"
 
-producer = KafkaProducer(bootstrap_servers=['kafka:9092'], value_serializer=lambda v: json.dumps(v, ensure_ascii=False, default=lambda o: o.__dict__).encode('utf8'))
-
 
 def run():
-    consumer = KafkaConsumer(TOPICO_RECEPTOR_MATRICULA, bootstrap_servers=['kafka:9092'], group_id='pweb-receptor-matricula')
+    for i in range(20):
+        brokers_available = True
+        try:
+            consumer = KafkaConsumer(TOPICO_RECEPTOR_MATRICULA, bootstrap_servers=['kafka:9092'], group_id='pweb-receptor-matricula')
+        except kafka.errors.NoBrokersAvailable:
+            brokers_available = False
+            sleep(3)
+        if brokers_available:
+            break
     for msg in consumer:
         try:
             matricula = msg.value.decode("utf-8")
@@ -24,6 +31,17 @@ def run():
             sendErrorConsumer()
 
 def sendAluno(aluno):
+    for i in range(20):
+        brokers_available = True
+        try:
+            producer = KafkaProducer(bootstrap_servers=['kafka:9092'],
+                                     value_serializer=lambda v: json.dumps(v, ensure_ascii=False,
+                                                                           default=lambda o: o.__dict__).encode('utf8'))
+        except kafka.errors.NoBrokersAvailable:
+            brokers_available = False
+            sleep(3)
+        if brokers_available:
+            break
     producer.send(TOPICO_RECEPTOR_ALUNO, aluno).get()
 
 def sendEmptyAluno():

@@ -79,14 +79,14 @@ def persistir():
 
 def agendador():
     schedule.every().day.at("00:00").do(persistir)
-    schedule.every().minute.do(persistir)
+    # schedule.every().minute.do(persistir)
     while True:
         schedule.run_pending()
         sleep(1)
 
 
 def run():
-	print("run...1")
+	# print("run...1")
 	persistir()
 	agendador()
 	thread = Thread(target=agendador)
