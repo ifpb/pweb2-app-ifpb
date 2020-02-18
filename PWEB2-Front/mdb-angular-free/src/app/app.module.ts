@@ -11,6 +11,7 @@ import { LoginComponent } from './login/login.component';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { AlunoComponent } from './aluno/aluno.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { AlunoComponent } from './aluno/aluno.component';
     BrowserModule,
     BrowserAnimationsModule,
     MDBBootstrapModule.forRoot(),
+    HttpClientModule,
     FormsModule,
     AppRoutingModule,
     RouterModule.forRoot([]),

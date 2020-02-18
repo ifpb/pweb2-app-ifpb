@@ -1,4 +1,18 @@
 import { Component, OnInit } from '@angular/core';
+import { LoginService } from 'src/app/services/login.service';
+import { Router } from '@angular/router';
+import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import { ErrorStateMatcher } from '@angular/material';
+import Swal from 'sweetalert2';
+import { Login } from '../models/Login';
+import { Token } from '../models/Token';
+
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+  }
+}
 
 @Component({
   selector: 'app-login',
@@ -7,10 +21,42 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  public matcher = new MyErrorStateMatcher();
+  public login: Login = new Login();
+  public token: Token = new Token();
+
+  constructor(
+    private loginService: LoginService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
-    console.log("FOI")
+    sessionStorage.clear();
   }
 
+  loginUsuario() {
+    try {
+      this.loginService.login(this.login).subscribe(res => {
+        console.log(res);
+        console.log('foi');
+        this.token.token = res.body.token;
+        sessionStorage.setItem("token", this.token.token);
+        if(sessionStorage.getItem("token") != null){
+          this.router.navigate(['/aluno', this.login.matricula]);
+          console.log(sessionStorage.getItem('token'))
+        }
+      },
+      error => {
+        console.log(error)
+        Swal.fire({
+          icon: 'error',
+          title: 'Não foi possivel efetuar login!',
+          text: 'Tente novamente',
+          confirmButtonColor:'#FF8BAB'
+        })
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  }
 }

@@ -21,18 +21,18 @@
 
       <!-- Name -->
       <div class="md-form mt-3">
-        <input type="text" id="materialSubscriptionFormPasswords" class="form-control" mdbInput>
+        <input type="text" name="matricula" [(ngModel)]="login.matricula" id="materialSubscriptionFormPasswords" class="form-control" mdbInput>
         <label for="materialSubscriptionFormPasswords">Matricula</label>
       </div>
 
       <!-- E-mai -->
       <div class="md-form">
-        <input type="email" id="materialSubscriptionFormEmail" class="form-control" mdbInput>
+        <input type="password" name="password" [(ngModel)]="login.senha" id="materialSubscriptionFormEmail" class="form-control" mdbInput>
         <label for="materialSubscriptionFormEmail">Senha</label>
       </div>
 
       <!-- Sign in button -->
-      <button mdbBtn color="info" [routerLink]="['/aluno']" routerLinkActive="router-link-active"  rounded="true" block="true" mdbBtn color="dark" mdbWavesEffect
+      <button mdbBtn color="info" (click)="loginUsuario()" routerLinkActive="router-link-active"  rounded="true" block="true" mdbBtn color="dark" mdbWavesEffect
         class="z-depth-0 my-4 waves-effect" type="submit">Entrar</button>
       <p>
         <a [routerLink]="['/cadastro']" routerLinkActive="router-link-active"  target="_blank">Cadastre-se</a>
