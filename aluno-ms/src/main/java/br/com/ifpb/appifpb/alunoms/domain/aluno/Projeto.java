@@ -1,11 +1,14 @@
 package br.com.ifpb.appifpb.alunoms.domain.aluno;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 @Document
 @Getter
@@ -16,7 +19,11 @@ public class Projeto {
     private TipoProjeto tipo;
     private String participantes;
     private String areaConhecimento;
+
+//    @DateTimeFormat(iso = DateTimeFormatter.ofPattern("dd/MM/Myyyy-MM-dd"))
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataInicio;
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataFim;
     private String valor;
     private String unidadeOrganizacional;

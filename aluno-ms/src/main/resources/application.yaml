@@ -1,6 +1,7 @@
 server:
   port: 8081
 
+
 spring:
   data:
     mongodb:
@@ -23,17 +24,22 @@ spring:
           destination: receptor-matricula
       kafka:
         binder:
-          brokers: localhost:9092
+          brokers: 192.168.0.118:9092
 
-
+#  IP DE IAN
   kafka:
     consumer:
-      bootstrap-servers: localhost:9092
+      bootstrap-servers: 192.168.0.118:9092
       group-id: pweb-receptor-matricula
       auto-offset-reset: earliest
     producer:
-      bootstrap-servers: localhost:9092
+      bootstrap-servers: 192.168.0.118:9092
 
+#IP DE LEANDERSON
+eureka:
+  client:
+    service-url:
+      defaultZone: http://192.168.0.109:8761/eureka/
 
 app:
   autenticacaoPadrao:
