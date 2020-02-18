@@ -31,16 +31,15 @@
 <div class="container">
 
     <div class="row">
-        <h2 class="h2-responsive mt-4 col-md-6 offset-md-3">NOME DO ALUNO MUITO GRANDE</h2>
+        <h2 class="h2-responsive mt-4 col-md-6 offset-md-3">{{aluno.nome}}</h2>
     </div>
 
     <hr class="w-75">
 
     <div class="row">
         <div class="input-group mb-3">
-            <select class="custom-select" id="inputGroupSelect02">
-                <option selected>Escolher Matricula ... </option>
-                <option value="1">2016220101256</option>
+            <select class="custom-select" *ngFor="let matricula of aluno.matriculas" id="inputGroupSelect02">
+                <option value="1">{{matricula.valor}}</option>
             </select>
             <div class="input-group-append">
                 <label class="input-group-text" for="inputGroupSelect02">Matriculas</label>
@@ -51,7 +50,7 @@
         <div class="col-3">
             <h4>
                 Situação:
-                <small class="text-muted"> Jubilado</small>
+                <small class="text-muted">{{aluno.matriculas.situacao}}</small>
             </h4>
         </div>
         <div class="col-3">
