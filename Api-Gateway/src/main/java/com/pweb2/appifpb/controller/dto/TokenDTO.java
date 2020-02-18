@@ -1,4 +1,4 @@
-package br.com.ifpb.appifpb.alunoms.controller.dto;
+package com.pweb2.appifpb.controller.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
