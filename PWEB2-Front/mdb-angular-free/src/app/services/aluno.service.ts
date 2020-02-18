@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 const httpOptions = new HttpHeaders(
   {
     'Content-Type': 'application/json',
-    'Authorization': sessionStorage.getItem('token')
+    'Authorization': `Bearer ${sessionStorage.getItem('token')}`
   }
 );
 
@@ -16,7 +16,7 @@ const httpOptions = new HttpHeaders(
 })
 export class AlunoService {
 
-  private url = environment.host+'aluno';
+  private url = environment.host+'api/aluno/';
 
   constructor(private http: HttpClient) {
   }
@@ -27,6 +27,10 @@ export class AlunoService {
 
   listar(): Observable<HttpResponse<Aluno[]>> {
     return this.http.get<Aluno[]>(this.url, { headers: httpOptions, observe: 'response' });
+  }
+
+  buscar(matricula: string): Observable<HttpResponse<Aluno>>{
+    return this.http.get<Aluno>(this.url + "aluno/" + matricula, {headers: httpOptions, observe: 'response'});
   }
 
 }
