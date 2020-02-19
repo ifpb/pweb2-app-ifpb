@@ -2,6 +2,15 @@ server:
   port: 8082
 
 spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5433/campi_db
+    name: postgres
+    password: postgres
+  jpa:
+    hibernate:
+      ddl-auto: create
+    database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+
   cloud:
     stream:
       bindings:
@@ -21,7 +30,6 @@ spring:
         binder:
           brokers: 192.168.0.118:9092
 
-  #  IP DE IAN
   kafka:
     consumer:
       bootstrap-servers: 192.168.0.118:9092
