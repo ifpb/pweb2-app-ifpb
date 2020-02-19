@@ -24,6 +24,7 @@ export class LoginComponent implements OnInit {
   public matcher = new MyErrorStateMatcher();
   public login: Login = new Login();
   public token: Token = new Token();
+  public usuarioAutenticado:boolean = false;
 
   constructor(
     private loginService: LoginService,
@@ -42,6 +43,7 @@ export class LoginComponent implements OnInit {
         this.token.token = res.body.token;
         sessionStorage.setItem("token", this.token.token);
         if(sessionStorage.getItem("token") != null){
+          this.usuarioAutenticado = true;
           this.router.navigate(['/aluno', this.login.matricula]);
           console.log(sessionStorage.getItem('token'))
         }
@@ -58,5 +60,6 @@ export class LoginComponent implements OnInit {
     } catch (e) {
       console.log(e);
     }
+
   }
 }
