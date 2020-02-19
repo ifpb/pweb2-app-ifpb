@@ -24,6 +24,7 @@ services:
       KAFKA_CREATE_TOPICS: "meu-topico-legal:1:1"
       KAFKA_BROKER_ID: 2
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_MESSAGE_MAX_BYTES: 25000000
     depends_on:
       - zookeeper
   python:

@@ -5,8 +5,8 @@ import requests
 from threading import Thread
 import schedule
 from time import sleep
-
-
+import data_processor_campi
+from kafka_manager import sendQuantidadeAlunosComBolsaDesistentes, sendSituacaoAlunoCanpiCurso, sendQuantidadeAlunosLimparamMatriculas
 def download_dados():
     print('Iniciando download dos dados.\n...')
     nomes = ['alunos.csv', 'campi.csv', 'bolsas.csv', 'projetos-extensao.csv', 'projetos-pesquisa.csv']
@@ -75,6 +75,10 @@ def persistir():
     tratando_csv_projetos_extensao().to_sql(name='projetos_extensao', con=engine, if_exists='replace', index=True, index_label='id')
     tratando_csv_projetos_pesquisa().to_sql(name='projetos_pesquisa', con=engine, if_exists='replace', index=True, index_label='id')
     print('Persistência concluida.')
+    sendQuantidadeAlunosLimparamMatriculas(data_processor_campi.quantidade_alunos_limparam_matriculas(engine))
+    sendSituacaoAlunoCanpiCurso(data_processor_campi.situacao_campus_curso(engine))
+    sendQuantidadeAlunosComBolsaDesistentes(data_processor_campi.quantidade_alunos_auxilio_e_desistiram(engine))
+
 
 
 def agendador():

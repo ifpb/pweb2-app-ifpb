@@ -41,3 +41,22 @@ class Matricula:
         self.cota = cota
         self.campus = campus
         self.curso = curso
+
+class RegistrationInfo:
+    def __init__(self, curso, campus, quantMatriculasLimpas, totalAluno):
+        self.curso = curso
+        self.campus = campus
+        self.quantMatriculasLimpas = quantMatriculasLimpas
+        self.totalAluno = totalAluno
+
+class StudentInfo:
+    def __init__(self, campus, curso, situacao):
+        self.campus = campus
+        self.curso = curso
+        self.situacao = situacao
+
+class CampusInfo:
+    def __init__(self, campus, quant, total):
+        self.campus = campus
+        self.quant = quant
+        self.total = total
