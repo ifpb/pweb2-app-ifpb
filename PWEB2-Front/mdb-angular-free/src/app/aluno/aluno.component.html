@@ -2,7 +2,7 @@
 <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark green" [containerInside]="false">
 
     <!-- Navbar brand -->
-    <mdb-navbar-brand><a class="navbar-brand" href="#">AHUSDHAUSIFPB</a></mdb-navbar-brand>
+    <mdb-navbar-brand><a class="navbar-brand text-center" href="#">MELHOR QUE O SUAP IFPB</a></mdb-navbar-brand>
 
     <!-- Collapsible content -->
     <links>
@@ -16,7 +16,7 @@
                     <mdb-icon fas icon="user"></mdb-icon> Perfil<span class="caret"></span>
                 </a>
                 <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
-                    <a class="dropdown-item waves-light" mdbWavesEffect href="#">Log out</a>
+                    <a class="dropdown-item waves-light" (click)="logout()" mdbWavesEffect href="#">Log out</a>
                 </div>
             </li>
 
@@ -50,25 +50,25 @@
         <div class="col-3">
             <h4>
                 Situação:
-                <small class="text-muted">{{aluno.matriculas.situacao}}</small>
+                <small class="text-muted">{{matriculaLogin.situacao}}</small>
             </h4>
         </div>
         <div class="col-3">
             <h4>
                 Curso:
-                <small class="text-muted"> Análise e Desenvolvimento de Sistemas</small>
+                <small class="text-muted">{{matriculaLogin.curso}}</small>
             </h4>
         </div>
         <div class="col-3">
             <h4>
                 Cota:
-                <small class="text-muted"> Ampla Concorrencia</small>
+                <small class="text-muted">{{matriculaLogin.cota}}</small>
             </h4>
         </div>
         <div class="col-3">
             <h4>
                 Campus:
-                <small class="text-muted"> Cajazeiras</small>
+                <small class="text-muted">{{matriculaLogin.campus}}</small>
             </h4>
         </div>
     </div>
@@ -81,69 +81,51 @@
 
     <hr class="w-75">
 
-    <div class="row">
+    <div class="row" *ngFor="let projeto of aluno.projetos">
         <div id="accordion">
             <div class="card">
                 <div class="card-header" id="headingOne">
                     <h5 class="mb-0">
                         <button class="btn" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
                             aria-controls="collapseOne">
-                            NOME DE PROJETO EXTREMAMANETE GIGANTESCO MESMO
+                            {{projeto.titulo}}
                         </button>
                     </h5>
                 </div>
 
-                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                <div id="collapseOne" class="collapse" [ngClass]="{'show': verificarShow(projeto.titulo)}"
+                    aria-labelledby="headingOne" data-parent="#accordion">
                     <div class="card-body">
-                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
-                        3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt
-                        laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin
-                        coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes
-                        anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings
-                        occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard
-                        of them accusamus labore sustainable VHS.
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-header" id="headingTwo">
-                    <h5 class="mb-0">
-                        <button class="btn collapsed" data-toggle="collapse" data-target="#collapseTwo"
-                            aria-expanded="false" aria-controls="collapseTwo">
-                            NOME DE PROJETO EXTREMAMANETE GIGANTESCO MESMO DNV PQ ESSE E GRANDE MESMO
-                        </button>
-                    </h5>
-                </div>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-                    <div class="card-body">
-                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
-                        3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt
-                        laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin
-                        coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes
-                        anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings
-                        occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard
-                        of them accusamus labore sustainable VHS.
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-header" id="headingThree">
-                    <h5 class="mb-0">
-                        <button class="btn collapsed" data-toggle="collapse" data-target="#collapseThree"
-                            aria-expanded="false" aria-controls="collapseThree">
-                            NOME DE PROJETO EXTREMAMANETE GIGANTESCO MESMO 3 PRA FICAR IGUAL
-                        </button>
-                    </h5>
-                </div>
-                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-                    <div class="card-body">
-                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
-                        3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt
-                        laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin
-                        coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes
-                        anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings
-                        occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard
-                        of them accusamus labore sustainable VHS.
+                        <div class="row">
+                            <div class="col-12">
+                                <h4 class="projeto">
+                                    Tipo do Projeto:
+                                    <small class="text-muted">{{projeto.tipo}}</small>
+                                </h4>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <h4 class="projeto">
+                                    Participantes:
+                                    <small class="text-muted">{{projeto.participantes}}</small>
+                                </h4>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <h4 class="projeto">
+                                    Área de Conhecimento:
+                                    <small class="text-muted">{{projeto.areaConhecimento}}</small>
+                                </h4>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -159,67 +141,23 @@
     <hr class="w-75">
 
     <div class="row">
-        <div class="col-4">
-            <!-- Material form subscription -->
+        <div class="col-4" *ngFor="let bolsa of aluno.bolsas">
             <mdb-card class="col-md-6 offset-md-3 mt-5">
 
                 <mdb-card-header class="elegant-color white-text text-center py-4">
                     <h5>
-                        <strong>Moradia</strong>
+                        <strong>{{bolsa.categoria}}</strong>
                     </h5>
                 </mdb-card-header>
 
-                <!--Card content-->
                 <mdb-card-body class="px-lg-5">
 
-                    <h4 class="ml-3">4</h4>
+                    <h4 class="ml-3">{{bolsa.quantidade}}</h4>
 
                 </mdb-card-body>
 
             </mdb-card>
-            <!-- Material form subscription -->
-        </div>
-
-        <div class="col-4">
-            <!-- Material form subscription -->
-            <mdb-card class="col-md-6 offset-md-3 mt-5">
-
-                <mdb-card-header class="elegant-color white-text text-center py-4">
-                    <h5>
-                        <strong>Almoço</strong>
-                    </h5>
-                </mdb-card-header>
-
-                <!--Card content-->
-                <mdb-card-body class="px-lg-5">
-
-                    <h4 class="ml-3">2</h4>
-
-                </mdb-card-body>
-
-            </mdb-card>
-            <!-- Material form subscription -->
-        </div>
-
-        <div class="col-4">
-            <!-- Material form subscription -->
-            <mdb-card class="col-md-6 offset-md-3 mt-5">
-
-                <mdb-card-header class="elegant-color white-text text-center py-4">
-                    <h5>
-                        <strong>Jantar</strong>
-                    </h5>
-                </mdb-card-header>
-
-                <!--Card content-->
-                <mdb-card-body class="px-lg-5">
-
-                    <h4 class="ml-3">1</h4>
-
-                </mdb-card-body>
-
-            </mdb-card>
-            <!-- Material form subscription -->
+            
         </div>
     </div>
 
@@ -230,11 +168,11 @@
 <!-- Footer -->
 <footer class="page-footer font-small green">
 
-        <!-- Copyright -->
-        <div class="footer-copyright text-center py-3">© 2019 Copyright:
-          <a href="https://Raul-Coelho.github.io"> Raul Coelho</a>
-        </div>
-        <!-- Copyright -->
-      
-      </footer>
-      <!-- Footer -->
+    <!-- Copyright -->
+    <div class="footer-copyright text-center py-3">© 2019 Copyright:
+        <a href="https://Raul-Coelho.github.io"> Raul Coelho</a>
+    </div>
+    <!-- Copyright -->
+
+</footer>
+<!-- Footer -->

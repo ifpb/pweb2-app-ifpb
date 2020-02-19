@@ -1,7 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AlunoService } from '../services/aluno.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Aluno } from '../models/Aluno';
+import { Matricula } from '../models/Matricula';
+import { Projetos } from '../models/Projetos';
 
 @Component({
   selector: 'app-aluno',
@@ -14,36 +16,59 @@ export class AlunoComponent implements OnInit, OnDestroy {
   matriculaAluno: string;
   subscriptions: any = {};
   aluno: Aluno;
+  matriculaLogin: Matricula;
+  show: string;
 
   constructor(
     private alunoservice: AlunoService,
     private route: ActivatedRoute,
-    ) { }
+    private router: Router,
+  ) { }
 
   ngOnInit() {
-    if(this.route.params != null){
+    if (this.route.params != null) {
       this.subscriptions.route = this.route.params.subscribe(
         params => {
           this.matriculaAluno = params['matricula'];
-          this.getAluno();          
+          this.getAluno();
         }
       )
     }
   }
 
-  getAluno(){
+  getAluno() {
     this.alunoservice.buscar(this.matriculaAluno).subscribe(
       res => {
         this.aluno = res.body
         console.log(this.aluno)
+        this.verificarMatricula();
       }
     )
   }
 
-  ngOnDestroy(){
-    if(this.subscriptions.route){
+  verificarShow(titulo){
+    return this.aluno.projetos[0].titulo === titulo;
+  }
+
+  verificarMatricula() {
+    this.aluno.matriculas.forEach(element => {
+      if(element.valor == this.aluno.id){
+        this.matriculaLogin = element;
+        console.log(this.matriculaLogin)
+      }
+    });
+  }
+
+  ngOnDestroy() {
+    if (this.subscriptions.route) {
       this.subscriptions.route.unsubscribe();
     }
+  }
+
+  logout() {
+    sessionStorage.clear();
+    this.router.navigateByUrl('/login')
+
   }
 
 }
