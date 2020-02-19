@@ -6,7 +6,7 @@ import {Bolsas} from '../models/Bolsas';
 export class Aluno {
     id: string;
     nome:string;
-    matricula: Matricula[]; // config matricula
+    matriculas: Matricula[]; // config matricula
     projetos:Projetos[] // Config Modelo
     bolsas:Bolsas[]; // Config Modelo
 
