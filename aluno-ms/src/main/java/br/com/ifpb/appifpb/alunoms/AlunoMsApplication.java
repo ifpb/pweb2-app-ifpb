@@ -15,6 +15,4 @@ public class AlunoMsApplication {
 		SpringApplication.run(AlunoMsApplication.class, args);
 	}
 
-
-
 }
