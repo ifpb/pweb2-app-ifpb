@@ -18,7 +18,7 @@ public class MatriculaLimpa {
     private Integer id;
     private String curso;
     private String campus;
-    private Float quantidadeMatriculasLimpas;
-    private Float totalAlunos;
+    private Float quantMatriculasLimpas;
+    private Float totalAluno;
 
 }
