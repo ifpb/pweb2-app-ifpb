@@ -17,7 +17,7 @@ export class AppComponent implements OnInit{
   ){}
 
   ngOnInit(){
-    this.verifica();
+    // this.verifica();
   }
 
 verifica(){
@@ -36,17 +36,14 @@ verifica(){
           url = event.url
           if (url == "/") {
             console.log(url)
-            this.showMenu = true
             this.router.navigate(['/home']);
           }
           else if (url == "/login") {
             console.log(url)
-            this.showMenu = false
             this.router.navigate([url]);
           }
           else {
             console.log("Ultimo else")
-            this.showMenu = true
             this.router.navigate([url]);
           }
         }
@@ -61,7 +58,6 @@ verifica(){
   }
   else {
     console.log("entrou no else")
-    this.showMenu = false;
     this.router.navigate(['/login']);
   }
 }
