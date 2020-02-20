@@ -1,0 +1,128 @@
+<!--Navbar-->
+<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark green" [containerInside]="false">
+
+    <!-- Navbar brand -->
+    <mdb-navbar-brand><a class="navbar-brand text-center" href="#">MELHOR QUE O SUAP IFPB</a></mdb-navbar-brand>
+
+    <!-- Collapsible content -->
+    <links>
+
+        <!-- Links -->
+        <ul class="navbar-nav ml-auto">
+            <!-- Dropdown -->
+            <li class="nav-item">
+                <a type="button" [routerLink]="['/login']" routerLinkActive="router-link-active"
+                    class="nav-link waves-light">
+                    <mdb-icon fas icon="user"></mdb-icon> Login<span class="caret"></span>
+                </a>
+
+            </li>
+
+        </ul>
+        <!-- Links -->
+    </links>
+    <!-- Collapsible content -->
+
+</mdb-navbar>
+<!--/.Navbar-->
+
+<div class="container">
+
+    <div class="row">
+        <h2 class="mt-4 col-md-10 offset-md-2">INSTITUTO DE CIÊNCIA E TECNOLOGIA DA PARAÍBA</h2>
+    </div>
+
+    <hr class="w-75">
+
+    <div class="row">
+        <h4 class="mt-4 cold-md-10">
+            <p>
+                O Instituto Federal da Paraíba - IFPB é uma autarquia federal vinculada ao Ministério da Educação e
+                Cultura - MEC. Referência em ensino profissional no estado da Paraíba, o IFPB conta com 21 unidades
+                espalhadas em todo estado, entre campus, campus avançado e campus em fase de implantação. As unidades em
+                fase de implantação são gerenciadas pela Reitoria, que tem sede na capital, João Pessoa. Dado isso esse
+                portal de dados abertos se propõe a disponibilizar de maneira analítica os dados referentes aos
+                cursos e campis.
+            </p>
+        </h4>
+    </div>
+
+    <hr class="w-90">
+
+    <div class="row">
+        <div class="col-6">
+            <h4 class="mt-4 offset-md-4">
+                Quantidade de Alunos
+            </h4>
+        </div>
+
+        <div class="col-6">
+            <h4 class="mt-4 offset-md-3">
+                Quantidade de Desistentes
+            </h4>
+        </div>
+    </div>
+
+    <hr class="w-90">
+
+    <div class="row">
+        <div class="col-6">
+            <div style="display: block; width: 600px;">
+                <canvas mdbChart [chartType]="chartType" [datasets]="chartDatasets" [colors]="chartColors"
+                    [options]="chartOptions" [labels]="chartLabels" (chartHover)="chartHovered($event)"
+                    (chartClick)="chartClicked($event)">
+                </canvas>
+            </div>
+        </div>
+
+        <div class="col-6">
+            <div style="display: block; width: 600px;">
+                <canvas mdbChart [chartType]="chartType" [datasets]="chartDatasets" [colors]="chartColors"
+                    [options]="chartOptions" [labels]="chartLabels" (chartHover)="chartHovered($event)"
+                    (chartClick)="chartClicked($event)">
+                </canvas>
+            </div>
+        </div>
+    </div>
+
+    <hr class="w-90">
+
+    <div class="row">
+        <div class="col-12">
+            <h4 class="mt-4 offset-md-6">
+                Cursos
+            </h4>
+        </div>
+    </div>
+
+    <hr class="w-90">
+
+    <div class="row">
+        <select class="browser-default custom-select">
+            <option selected>Open this select menu</option>
+            <option value="1">One</option>
+        </select>
+    </div>
+
+    <div class="row mt-5 offset-md-3">
+        <div style="display: block; width: 600px;">
+            <canvas mdbChart [chartType]="chartType2" [datasets]="chartDatasets" [labels]="chartLabels"
+                [colors]="chartColors" [options]="chartOptions" [legend]="true" (chartHover)="chartHovered($event)"
+                (chartClick)="chartClicked($event)">
+            </canvas>
+        </div>
+    </div>
+
+</div>
+
+<!-- Footer -->
+<footer class="page-footer font-small green">
+
+    <!-- Copyright -->
+    <div class="footer-copyright text-center py-3">© 2019 Copyright:
+        <a href="https://Raul-Coelho.github.io"> MITC</a>
+    </div>
+    <!-- Copyright -->
+
+</footer>
+<!-- Footer -->
