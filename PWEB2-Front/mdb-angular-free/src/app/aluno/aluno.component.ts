@@ -18,6 +18,7 @@ export class AlunoComponent implements OnInit, OnDestroy {
   aluno: Aluno;
   matriculaLogin: Matricula;
   show: string;
+  matriculaRecive: string;
 
   constructor(
     private alunoservice: AlunoService,
@@ -26,13 +27,18 @@ export class AlunoComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
+    this.alunoservice.teste().subscribe(res => {
+      console.log("OpA");
+      console.log(res);
+    });
     if (this.route.params != null) {
       this.subscriptions.route = this.route.params.subscribe(
         params => {
           this.matriculaAluno = params['matricula'];
           this.getAluno();
         }
-      )
+      );
+      
     }
   }
 
@@ -59,6 +65,16 @@ export class AlunoComponent implements OnInit, OnDestroy {
     });
   }
 
+  mudarInformacoes(event){
+    console.log(event);
+    this.aluno.matriculas.forEach(element => {
+      if(element.valor == event){
+        this.matriculaLogin = element;
+        console.log(this.matriculaLogin)
+      }
+    });
+  }
+
   ngOnDestroy() {
     if (this.subscriptions.route) {
       this.subscriptions.route.unsubscribe();
@@ -67,7 +83,7 @@ export class AlunoComponent implements OnInit, OnDestroy {
 
   logout() {
     sessionStorage.clear();
-    this.router.navigateByUrl('/login')
+    this.router.navigate[('/home')]
 
   }
 

@@ -31,15 +31,15 @@
 <div class="container" *ngIf="aluno">
 
     <div class="row">
-        <h2 class="h2-responsive mt-4 col-md-6 offset-md-3">{{aluno.nome}}</h2>
+        <h2 class="h2-responsive mt-4 col-md-6 offset-md-4">{{aluno.nome}}</h2>
     </div>
 
     <hr class="w-75">
 
     <div class="row">
         <div class="input-group mb-3">
-            <select class="custom-select" *ngFor="let matricula of aluno.matriculas" id="inputGroupSelect02">
-                <option value="1">{{matricula.valor}}</option>
+            <select class="custom-select" (change)="mudarInformacoes($event.target.value)" id="inputGroupSelect02">
+                <option *ngFor="let matricula of aluno.matriculas">{{matricula.valor}}</option>
             </select>
             <div class="input-group-append">
                 <label class="input-group-text" for="inputGroupSelect02">Matriculas</label>
@@ -81,7 +81,7 @@
 
     <hr class="w-75">
 
-    <div class="row" *ngFor="let projeto of aluno.projetos">
+    <div class="row offset-md-1" *ngFor="let projeto of aluno.projetos">
         <div id="accordion">
             <div class="card">
                 <div class="card-header" id="headingOne">
@@ -98,10 +98,10 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-12">
-                                <h4 class="projeto">
+                                <h6 class="size projeto">
                                     Tipo do Projeto:
                                     <small class="text-muted">{{projeto.tipo}}</small>
-                                </h4>
+                                </h6>
                             </div>
                         </div>
 
@@ -109,10 +109,10 @@
 
                         <div class="row">
                             <div class="col-12">
-                                <h4 class="projeto">
+                                <h6 class="projeto">
                                     Participantes:
                                     <small class="text-muted">{{projeto.participantes}}</small>
-                                </h4>
+                                </h6>
                             </div>
                         </div>
 
@@ -120,10 +120,10 @@
 
                         <div class="row">
                             <div class="col-12">
-                                <h4 class="projeto">
+                                <h6 class="projeto">
                                     Área de Conhecimento:
                                     <small class="text-muted">{{projeto.areaConhecimento}}</small>
-                                </h4>
+                                </h6>
                             </div>
                         </div>
                     </div>
