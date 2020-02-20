@@ -12,7 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 public class CampiDesistenteService {
 
-    private CampiDesistenteRepository campiRepository;
+    private final CampiDesistenteRepository campiRepository;
 
     public List<NomeCampiDTO> nomesCampi(){
         return this.campiRepository.listarNomesDosCampi();

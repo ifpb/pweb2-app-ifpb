@@ -18,7 +18,7 @@ import java.util.List;
 @AllArgsConstructor
 public class CampiDesistenteController {
 
-    private CampiDesistenteService campiService;
+    private final CampiDesistenteService campiService;
 
     @GetMapping("all")
     public ResponseEntity<List<NomeCampiDTO>> nomesCampi(){
@@ -26,7 +26,7 @@ public class CampiDesistenteController {
     }
 
     @GetMapping("{nomeCampi}")
-    public ResponseEntity<CampiComPercentualDTO> buscarCampusPorNome(@PathVariable("nome") String nome){
+    public ResponseEntity<CampiComPercentualDTO> buscarCampusPorNome(@PathVariable("nomeCampi") String nome){
         return ResponseEntity.ok().body(this.campiService.buscarCampusPorNome(nome));
     }
 }

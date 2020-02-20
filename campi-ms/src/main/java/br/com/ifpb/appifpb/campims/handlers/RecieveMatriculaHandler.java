@@ -19,9 +19,9 @@ public class RecieveMatriculaHandler {
 
     @StreamListener(RegChannel.INPUT)
     public void onMatriculasRecieved(List<MatriculaLimpa> matriculasLimpas) {
-        matriculaLimpaRepository.deleteAll();
-        matriculasLimpas.forEach(matriculaLimpaRepository::save);
-        log.info("matriculas limpas cadastradas com sucesso!");
+//        matriculaLimpaRepository.deleteAll();
+//        matriculasLimpas.forEach(matriculaLimpaRepository::save);
+//        log.info("matriculas limpas cadastradas com sucesso!");
     }
 
 }
