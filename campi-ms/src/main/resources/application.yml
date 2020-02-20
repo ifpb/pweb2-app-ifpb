@@ -4,12 +4,13 @@ server:
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5433/campi_db
-    name: postgres
+    username: postgres
     password: postgres
   jpa:
     hibernate:
       ddl-auto: create
     database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+    generate-ddl: true
 
   cloud:
     stream:
@@ -40,4 +41,4 @@ spring:
 eureka:
   client:
     service-url:
-      defaultZone: http://192.168.0.109:8761/eureka/
+      defaultZone: http://192.168.0.113:8761/eureka/
