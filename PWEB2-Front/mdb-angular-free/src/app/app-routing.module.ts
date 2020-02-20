@@ -5,7 +5,7 @@ import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   { path: '', loadChildren: './home/home.module#HomeModule', pathMatch:'full'},
-  { path: 'login', loadChildren: './login/login.module#LoginModule', pathMatch:'full' },
+  { path: 'login', loadChildren: './login/login.module#LoginModule'},
   { path: 'cadastro', loadChildren: './cadastro/cadastro.module#CadastroModule', pathMatch:'full'},
   { path: 'aluno/:matricula', loadChildren: './aluno/aluno.module#AlunoModule', canActivate:[AuthGuard]},
   { path: 'home', loadChildren: './home/home.module#HomeModule', pathMatch:'full'}

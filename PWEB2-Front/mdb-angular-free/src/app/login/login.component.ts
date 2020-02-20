@@ -35,6 +35,10 @@ export class LoginComponent implements OnInit {
     sessionStorage.clear();
   }
 
+  cadastro(){
+    this.router.navigate[('/cadastro')]
+  }
+
   loginUsuario() {
     try {
       this.loginService.login(this.login).subscribe(res => {
@@ -62,4 +66,6 @@ export class LoginComponent implements OnInit {
     }
 
   }
+
+
 }

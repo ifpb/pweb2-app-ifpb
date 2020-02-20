@@ -24,14 +24,13 @@ export class CadastroComponent implements OnInit {
   cadastrarAluno() {
     this.alunoService.salvar(this.login).subscribe(
       res => {
-        console.log("foi");
         Swal.fire({
           icon: 'success',
           title: 'Cadastrado com sucesso!',
-          text: 'retornando ao login',
+          text: 'Retornar ao login!',
           confirmButtonColor:'#00FF00'
         }).then(result =>{
-          this.router.navigate[('/login')];
+          this.router.navigate(['/login']);
         }).catch(erro =>{
           console.log(erro);
         })
