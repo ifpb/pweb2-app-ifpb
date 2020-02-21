@@ -2,6 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
+import { NomeCampiDTO } from '../models/NomeCampiDTO';
+import { QuantCursosDTO } from '../models/QuantCursosDTO';
+import { NomeSituacoesDTO } from '../models/NomeSituacoesDTO';
+import { NomeCursosDTO } from '../models/NomeCursosDTO';
 
 const httpOptions = new HttpHeaders(
   {
@@ -14,14 +18,35 @@ const httpOptions = new HttpHeaders(
   providedIn: 'root'
 })
 export class CampiService {
-  private url = environment.host+'api/aluno/';
+  private url = environment.host+'api/campi/';
 
-  private urlRegistro = environment.host+'api/register/';
 
   constructor(private http: HttpClient) { }
 
-  // listar(): Observable<HttpResponse<Aluno[]>> {
-  //   return this.http.get<Aluno[]>(this.url, { headers: httpOptions, observe: 'response' });
-  // }
+
+  getCursos(nomeCampi:string): Observable<HttpResponse<NomeCursosDTO[]>> {
+    return this.http.get<NomeCursosDTO[]>(this.url + 'campus/' + nomeCampi,  { headers: httpOptions, observe: 'response' });
+  }
+
+  getNomeCampus(nomeCampus:string): Observable<HttpResponse<QuantCursosDTO>> {
+    return this.http.get<QuantCursosDTO>(this.url + 'campus/' + nomeCampus,  { headers: httpOptions, observe: 'response' });
+  }
+
+
+  getNomeCampusNomeCurso(nomeCampus:string, nomeCurso:string): Observable<HttpResponse<QuantCursosDTO>> {
+    return this.http.get<QuantCursosDTO>(this.url + 'campus/' + nomeCampus + '/curso/' + nomeCurso , { headers: httpOptions, observe: 'response' });
+  }
+
+  getNomeCampusSituacao(nomeCampus:string, situacao:string): Observable<HttpResponse<QuantCursosDTO>> {
+    return this.http.get<QuantCursosDTO>(this.url + 'campus/' + nomeCampus + '/situacao/' + situacao , { headers: httpOptions, observe: 'response' });
+  }
+
+  getNomeCampusCursoSituacao(nomeCampus:string, curso:string, situacao:string): Observable<HttpResponse<QuantCursosDTO>> {
+    return this.http.get<QuantCursosDTO>(this.url + 'campus/' + nomeCampus + '/curso/' + curso + '/situacao' + situacao , { headers: httpOptions, observe: 'response' });
+  }
+
+  getSituacoes(): Observable<HttpResponse<NomeSituacoesDTO[]>> {
+    return this.http.get<NomeSituacoesDTO[]>(this.url + 'situacoes', { headers: httpOptions, observe: 'response' });
+  }
 
 }

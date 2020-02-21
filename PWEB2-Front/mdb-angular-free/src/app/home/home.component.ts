@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CampiService } from '../services/campi.service';
 
 @Component({
   selector: 'app-home',
@@ -7,12 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private campiService: CampiService
+  ) { }
 
   ngOnInit() {
   }
-  public chartType2: string = 'bar';
-  public chartType: string = 'pie';
+  public chartType2: string = 'bar'; // GRafico de barra
+  public chartType: string = 'pie';  // Grafico de Pizza
 
   public chartDatasets: Array<any> = [
     { data: [300, 50, 100, 40, 120], label: 'My First dataset' }
