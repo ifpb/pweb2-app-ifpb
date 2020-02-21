@@ -26,8 +26,4 @@ public interface MatriculaLimpaRepository extends JpaRepository<MatriculaLimpa, 
             "WHERE m.campus = :campus AND m.curso = :curso")
     MatriculasLimpasDTO buscarPorCampusECurso(String campus, String curso);
 
-    @Query("SELECT new br.com.ifpb.appifpb.campims.dto.NomeCursosDTO(m.curso) FROM MatriculaLimpa m WHERE m.campus = :campus")
-    List<NomeCursosDTO> buscarNomesCursosPorCampi(String campus);
-
-
 }

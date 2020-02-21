@@ -14,10 +14,6 @@ public class CampiDesistenteService {
 
     private final CampiDesistenteRepository campiRepository;
 
-    public List<NomeCampiDTO> nomesCampi(){
-        return this.campiRepository.listarNomesDosCampi();
-    }
-
     public CampiComPercentualDTO buscarCampusPorNome(String nomeCampus){
         return this.campiRepository.listarCampusPorNome(nomeCampus);
     }

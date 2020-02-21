@@ -28,11 +28,6 @@ public class MatriculaLimpaController {
         return ResponseEntity.ok(matriculaLimpaService.buscarPorCampusMin(campus));
     }
 
-    @GetMapping("{id}/cursos")
-    public ResponseEntity<List<NomeCursosDTO>> buscarNomesCursos(@PathVariable("id") String campus) {
-        return ResponseEntity.ok(matriculaLimpaService.buscarNomesCurso(campus));
-    }
-
     @GetMapping("{campus}/curso/{curso}")
     public ResponseEntity<MatriculasLimpasDTO> buscarPorCampusECurso(@PathVariable("campus") String campus, @PathVariable("curso") String curso) {
         return ResponseEntity.ok(matriculaLimpaService.buscarPorCampuseCurso(campus,curso));
