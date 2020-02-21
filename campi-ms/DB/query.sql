@@ -4,5 +4,7 @@ select count(*) from campi_desistente;
 
 select * from info_curso limit 100;
 select * from campi_desistente limit 100;
+select * from matricula_limpa limit 100;
 
-delete from info_curso;
+--delete from info_curso;
+--delete from matricula_limpa;

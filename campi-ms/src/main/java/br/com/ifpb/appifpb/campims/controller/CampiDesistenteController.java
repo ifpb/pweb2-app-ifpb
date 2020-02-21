@@ -20,11 +20,6 @@ public class CampiDesistenteController {
 
     private final CampiDesistenteService campiService;
 
-    @GetMapping("all")
-    public ResponseEntity<List<NomeCampiDTO>> nomesCampi(){
-        return ResponseEntity.ok().body(this.campiService.nomesCampi());
-    }
-
     @GetMapping("{nomeCampi}")
     public ResponseEntity<CampiComPercentualDTO> buscarCampusPorNome(@PathVariable("nomeCampi") String nome){
         return ResponseEntity.ok().body(this.campiService.buscarCampusPorNome(nome));
