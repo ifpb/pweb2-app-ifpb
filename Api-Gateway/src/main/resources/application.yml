@@ -9,3 +9,8 @@ zuul:
       path: /api/aluno/**
       serviceId: aluno-ms
       sensitiveHeaders: Cookie,Set-Cookie,Content-Type
+feign:
+  compression:
+    response:
+      useGzipDecoder: true
+      enabled: true

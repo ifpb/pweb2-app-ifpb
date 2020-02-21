@@ -1,6 +1,7 @@
 package com.pweb2.appifpb.controller;
 
 import com.pweb2.appifpb.controller.dto.NomeSituacoesDTO;
+import com.pweb2.appifpb.controller.dto.QuantCampusCursoDTO;
 import com.pweb2.appifpb.controller.dto.QuantCursosDTO;
 import com.pweb2.appifpb.service.CampiService;
 import lombok.AllArgsConstructor;
@@ -35,7 +36,7 @@ public class CursosController {
         return this.campiService.buscaPorCampusEporSituacao(campus, situacao);
     }
 
-    @GetMapping("campus/{nomeCampus}/curso/{nomeCurso}/situacao/{situacao}")
+    @GetMapping("campus/{nomeCampus}/cursos/{nomeCurso}/situacao/{situacao}")
     public ResponseEntity<QuantCursosDTO> buscaPorCampusEporCursoEporSituacao(@PathVariable("nomeCampus") String campus,
                                                                               @PathVariable("nomeCurso") String curso,
                                                                               @PathVariable("situacao") String situacao){
@@ -47,8 +48,11 @@ public class CursosController {
         return this.campiService.listarSituacoes();
     }
 
-    @GetMapping("campus/{nomeCampus}/cursos/situacao/{situacai}")
-    public
+    @GetMapping("campus/{nomeCampus}/cursos/situacao/{situacao}")
+    ResponseEntity<List<QuantCampusCursoDTO>> buscarTotalCursosCampus(@PathVariable("nomeCampus") String campus,
+                                                                      @PathVariable("situacao") String situacao){
+        return this.campiService.buscarTotalCursosCampus(campus, situacao);
+    }
 
 
 }
