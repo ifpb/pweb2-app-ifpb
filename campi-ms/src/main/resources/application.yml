@@ -1,0 +1,44 @@
+server:
+  port: 8082
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5433/campi_db
+    username: postgres
+    password: postgres
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+    generate-ddl: true
+
+  cloud:
+    stream:
+      bindings:
+        regChannelReply:
+          contentType: application/json
+          group: pweb-receptor-campi
+          destination: registration-info
+        campiChannelReply:
+          contentType: application/json
+          group: pweb-receptor-campi
+          destination: campi-info
+        studentChannelReply:
+          contentType: application/json
+          group: pweb-receptor-campi
+          destination: student-info
+      kafka:
+        binder:
+          brokers: 192.168.0.118:9092
+
+  kafka:
+    consumer:
+      bootstrap-servers: 192.168.0.118:9092
+      group-id: pweb-receptor-campi
+      auto-offset-reset: earliest
+
+#IP DE LEANDERSON
+eureka:
+  client:
+    service-url:
+      defaultZone: http://192.168.0.113:8761/eureka/

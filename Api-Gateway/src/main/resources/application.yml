@@ -1,0 +1,16 @@
+server:
+  port: 8080
+
+zuul:
+  ignored-services: '*'
+  routes:
+    aluno-ms:
+#      stripPrefix: false
+      path: /api/aluno/**
+      serviceId: aluno-ms
+      sensitiveHeaders: Cookie,Set-Cookie,Content-Type
+feign:
+  compression:
+    response:
+      useGzipDecoder: true
+      enabled: true
