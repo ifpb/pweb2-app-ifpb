@@ -5,10 +5,18 @@ import requests
 from threading import Thread
 import schedule
 from time import sleep
+import data_processor_campi
+from kafka_manager import sendQuantidadeAlunosComBolsaDesistentes, sendSituacaoAlunoCanpiCurso, sendQuantidadeAlunosLimparamMatriculas
+import logging
 
+logging.basicConfig(format='%(asctime)s - %(levelname)s : %(message)s', filename='/app/logs/kafka_manager.log',
+                            datefmt='%m/%d/%Y %I:%M:%S %p', level=logging.INFO)
+log = logging.getLogger()
+
+log.info("data_processor.py")
 
 def download_dados():
-    print('Iniciando download dos dados.\n...')
+    log.info('Iniciando download dos dados.\n...')
     nomes = ['alunos.csv', 'campi.csv', 'bolsas.csv', 'projetos-extensao.csv', 'projetos-pesquisa.csv']
     reqs = [requests.get('https://dados.ifpb.edu.br/dataset/d02eb6b8-5745-4436-ae22-ef1c182897d9/resource/29c2b593-ed14-4b73-b30c-d6135f072cf7/download/alunos.csv'),
             requests.get('https://dados.ifpb.edu.br/dataset/096a37b3-52c6-43d6-9ec3-6de5b73b51a0/resource/77679e8c-f885-4b62-bf33-df7cc55b2bb9/download/campi.csv'),
@@ -20,7 +28,7 @@ def download_dados():
     for req, nome in zip(reqs, nomes):
         with open('/app/DB/dados/'+nome, 'wb') as csv:
             csv.write(req.content)
-    print('Fim do download.')
+    log.info('Fim do download.')
 
 
 def tratando_csv_bolsas():
@@ -40,7 +48,7 @@ def tratando_csv_projetos_pesquisa():
 
 
 def tratando_csv_aluno():
-    print('Tratando dados dos alunos.\n...')
+    log.info('Tratando dados dos alunos.\n...')
     #Convertendo para maiúsculo
     alunos = pandas.read_csv('/app/DB/dados/alunos.csv')
     alunos['curso.nome'] = alunos['curso.nome'].str.upper()
@@ -62,19 +70,23 @@ def tratando_csv_aluno():
     regxCampi = '|'.join(campi['nome'])
     alunos.drop(alunos[~alunos['curso.nome'].str.contains(r''+regxCampi)].index, inplace=True)
     alunos['campus'] = [re.search(r''+regxCampi, x).group() for x in alunos['curso.nome']]
-    print('Tratamento concluido.')
+    log.info('Tratamento concluido.')
     return alunos
 
 
 def persistir():
-    download_dados()
-    print('Persistindo dados.')
+    # download_dados()
+    log.info('Persistindo dados...')
     engine = create_engine('postgresql+psycopg2://postgres:postgres@db_postgres:5432/tratador_db')
     tratando_csv_aluno().to_sql(name='alunos', con=engine, if_exists='replace', index=True, index_label='id')
     tratando_csv_bolsas().to_sql(name='bolsas', con=engine, if_exists='replace', index=True, index_label='id')
     tratando_csv_projetos_extensao().to_sql(name='projetos_extensao', con=engine, if_exists='replace', index=True, index_label='id')
     tratando_csv_projetos_pesquisa().to_sql(name='projetos_pesquisa', con=engine, if_exists='replace', index=True, index_label='id')
-    print('Persistência concluida.')
+    log.info('Persistência concluida.')
+    sendQuantidadeAlunosLimparamMatriculas(data_processor_campi.quantidade_alunos_limparam_matriculas(engine))
+    sendSituacaoAlunoCanpiCurso(data_processor_campi.situacao_campus_curso(engine))
+    sendQuantidadeAlunosComBolsaDesistentes(data_processor_campi.quantidade_alunos_auxilio_e_desistiram(engine))
+
 
 
 def agendador():
@@ -86,8 +98,9 @@ def agendador():
 
 
 def run():
-	# print("run...1")
-	persistir()
-	agendador()
-	thread = Thread(target=agendador)
-	thread.start()
+    log.info("run...")
+    persistir()
+    # agendador()
+    log.info("agendado processamento")
+    thread = Thread(target=agendador)
+    thread.start()
