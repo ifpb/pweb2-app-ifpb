@@ -58,7 +58,7 @@
 
         <div class="col-6">
             <h4 class="mt-4 offset-md-3">
-                Quantidade de Desistentes
+                Quantidade de Egressos
             </h4>
         </div>
     </div>
@@ -77,8 +77,8 @@
 
         <div class="col-6">
             <div style="display: block; width: 600px;">
-                <canvas mdbChart [chartType]="chartType" [datasets]="chartDatasets" [colors]="chartColors"
-                    [options]="chartOptions" [labels]="chartLabels" (chartHover)="chartHovered($event)"
+                <canvas mdbChart [chartType]="chartType" [datasets]="chartDatasetsEgressos" [colors]="chartColors"
+                    [options]="chartOptions" [labels]="chartLabelsEgressos" (chartHover)="chartHovered($event)"
                     (chartClick)="chartClicked($event)">
                 </canvas>
             </div>
@@ -98,15 +98,15 @@
     <hr class="w-90">
 
     <div class="row">
-        <select class="browser-default custom-select">
+        <select class="browser-default custom-select" (change)="mudarCurso($event.target.value)">
             <option selected>Open this select menu</option>
-            <option value="1">One</option>
+            <option [value]="curso.nomeCurso" *ngFor="let curso of nomesCursos">{{curso.nomeCurso}}</option>
         </select>
     </div>
 
     <div class="row mt-5 offset-md-3">
         <div style="display: block; width: 600px;">
-            <canvas mdbChart [chartType]="chartType2" [datasets]="chartDatasets" [labels]="chartLabels"
+            <canvas mdbChart [chartType]="chartType2" [datasets]="chartDatasetsBarra" [labels]="chartLabelsBarra"
                 [colors]="chartColors" [options]="chartOptions" [legend]="true" (chartHover)="chartHovered($event)"
                 (chartClick)="chartClicked($event)">
             </canvas>

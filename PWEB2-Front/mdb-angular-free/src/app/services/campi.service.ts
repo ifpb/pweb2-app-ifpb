@@ -6,6 +6,7 @@ import { NomeCampiDTO } from '../models/NomeCampiDTO';
 import { QuantCursosDTO } from '../models/QuantCursosDTO';
 import { NomeSituacoesDTO } from '../models/NomeSituacoesDTO';
 import { NomeCursosDTO } from '../models/NomeCursosDTO';
+import { QuantCampusCursoDTO } from '../models/QuantCampusCursoDTO';
 
 const httpOptions = new HttpHeaders(
   {
@@ -24,8 +25,8 @@ export class CampiService {
   constructor(private http: HttpClient) { }
 
 
-  getCursos(nomeCampi:string): Observable<HttpResponse<NomeCursosDTO[]>> {
-    return this.http.get<NomeCursosDTO[]>(this.url + 'campus/' + nomeCampi,  { headers: httpOptions, observe: 'response' });
+  getCursos(nomeCampus:string): Observable<HttpResponse<NomeCursosDTO[]>> {
+    return this.http.get<NomeCursosDTO[]>(this.url + nomeCampus + '/cursos',  { headers: httpOptions, observe: 'response' });
   }
 
   getNomeCampus(nomeCampus:string): Observable<HttpResponse<QuantCursosDTO>> {
@@ -42,11 +43,15 @@ export class CampiService {
   }
 
   getNomeCampusCursoSituacao(nomeCampus:string, curso:string, situacao:string): Observable<HttpResponse<QuantCursosDTO>> {
-    return this.http.get<QuantCursosDTO>(this.url + 'campus/' + nomeCampus + '/curso/' + curso + '/situacao' + situacao , { headers: httpOptions, observe: 'response' });
+    return this.http.get<QuantCursosDTO>(this.url + 'campus/' + nomeCampus + '/curso/' + curso + '/situacao/' + situacao , { headers: httpOptions, observe: 'response' });
   }
 
   getSituacoes(): Observable<HttpResponse<NomeSituacoesDTO[]>> {
     return this.http.get<NomeSituacoesDTO[]>(this.url + 'situacoes', { headers: httpOptions, observe: 'response' });
+  }
+
+  getQuantCursoPorCampus(nomeCampus: string, situacao: string): Observable<HttpResponse<QuantCampusCursoDTO[]>> {
+    return this.http.get<QuantCampusCursoDTO[]>(this.url + 'campus/' + nomeCampus + '/cursos/situacao/' + situacao , { headers: httpOptions, observe: 'response' });
   }
 
 }
