@@ -12,11 +12,13 @@ import java.util.List;
 @Repository
 public interface CampiDesistenteRepository extends JpaRepository<CampiDesistente, Integer> {
 
-    @Query("SELECT new NomeCampiDTO(c.campus) FROM CampiDesistente c")
+    @Query("SELECT new br.com.ifpb.appifpb.campims.dto.NomeCampiDTO(c.campus) FROM CampiDesistente c")
     List<NomeCampiDTO> listarNomesDosCampi();
 
-    @Query("SELECT new CampiComPercentualDTO(c.id, c.campus, c.quant, c.total, (c.quant / c.total)) " +
+    @Query("SELECT new br.com.ifpb.appifpb.campims.dto.CampiComPercentualDTO(c.id, c.campus, c.quant, c.total,(c.quant / c.total * 100) as percentual) " +
             "FROM CampiDesistente c " +
             "WHERE c.campus = :nomeCampus")
     CampiComPercentualDTO listarCampusPorNome(String nomeCampus);
+
+
 }

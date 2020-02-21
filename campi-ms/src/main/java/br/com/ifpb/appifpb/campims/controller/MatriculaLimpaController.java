@@ -4,7 +4,6 @@ import br.com.ifpb.appifpb.campims.dto.MatriculasLimpasDTO;
 import br.com.ifpb.appifpb.campims.dto.NomeCursosDTO;
 import br.com.ifpb.appifpb.campims.service.MatriculaLimpaService;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

@@ -24,7 +24,7 @@ public class RecieveCursoHandler {
     @StreamListener(StudentChannel.INPUT)
     public void onUCursosRecieved(List<InfoCurso> infoCursos) {
 //        infoCursoRepository.deleteAll();
-//        infoCursos.forEach(infoCursoRepository::save);
-//        log.info("informações de cursos cadastradas com sucesso!");
+        infoCursos.forEach(infoCursoRepository::save);
+        log.info("informações de cursos cadastradas com sucesso!");
     }
 }
