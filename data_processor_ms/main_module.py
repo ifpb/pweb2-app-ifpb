@@ -4,6 +4,7 @@ import data_processor_campi
 from kafka_manager import sendQuantidadeAlunosComBolsaDesistentes, sendSituacaoAlunoCanpiCurso, sendQuantidadeAlunosLimparamMatriculas
 from sqlalchemy import create_engine
 
+
 if __name__ == "__main__":
     data_processor.run()
     kafka_manager.run()
@@ -11,3 +12,4 @@ if __name__ == "__main__":
     # sendQuantidadeAlunosLimparamMatriculas(data_processor_campi.quantidade_alunos_limparam_matriculas(engine))
     # sendSituacaoAlunoCanpiCurso(data_processor_campi.situacao_campus_curso(engine))
     # sendQuantidadeAlunosComBolsaDesistentes(data_processor_campi.quantidade_alunos_auxilio_e_desistiram(engine))
+    # pass

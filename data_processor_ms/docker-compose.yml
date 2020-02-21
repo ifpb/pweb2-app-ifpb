@@ -35,6 +35,7 @@ services:
       - .:/app/
       - ./DB/dados:/app/DB/dados
       - /etc/localtime:/etc/localtime:ro
+      - ./logs:/app/logs
     depends_on:
       - kafka
       - db_postgres

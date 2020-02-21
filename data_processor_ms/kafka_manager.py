@@ -4,6 +4,7 @@ import aluno_handler
 from Domain import Aluno
 import json
 from time import sleep
+import logging
 
 TOPICO_RECEPTOR_MATRICULA = "receptor-matricula"
 TOPICO_RECEPTOR_ALUNO = "receptor-aluno"
@@ -12,6 +13,11 @@ TOPICO_REGISTRATION = "registration-info"
 TOPICO_STUDENT = "student-info"
 TOPICO_CAMPI = "campi-info"
 
+logging.basicConfig(format='%(asctime)s - %(levelname)s : %(message)s', filename='/app/logs/kafka_manager.log',
+                            datefmt='%m/%d/%Y %I:%M:%S %p', level=logging.INFO)
+log = logging.getLogger()
+
+log.info("kafka_manager.py")
 
 def run():
     for i in range(20):
@@ -24,7 +30,9 @@ def run():
         if brokers_available:
             break
     for msg in consumer:
+        log.info(msg)
         try:
+
             matricula = msg.value.decode("utf-8")
             aluno = aluno_handler.run(matricula)
             if(aluno):
